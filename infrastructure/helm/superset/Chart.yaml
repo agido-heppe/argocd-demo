@@ -1,0 +1,14 @@
+name: superset      # Irrelevant
+apiVersion: v2      # Irrelevant once we can choose helm version in 7.0
+version: 1.0.0      # Irrelevant
+dependencies:       # Irrelevant
+  - name: superset
+    version: 0.12.3
+    repository: https://apache.github.io/superset
+  - name: zookeeper
+    version: 12.8.1
+    repository: https://charts.bitnami.com/bitnami
+  # Clickhouse
+  - name: altinity-clickhouse-operator
+    version: 0.23.0
+    repository: https://docs.altinity.com/clickhouse-operator

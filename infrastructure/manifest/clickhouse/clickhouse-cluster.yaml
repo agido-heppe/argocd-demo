@@ -1,0 +1,41 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+metadata:
+  name: "demo-01"
+spec:
+  defaults:
+    templates: 
+      podTemplate: clickhouse-server
+
+  configuration:
+    zookeeper:
+      nodes:
+        - host: zookeeper
+          port: 2181
+    clusters:
+      - name: "demo-01"
+        layout:
+          shardsCount: 1
+          replicasCount: 1
+    # 
+    users:
+      user2/networks/ip: "::/0"
+      user2/password: supersecretchange
+      user2/profile: default
+
+  templates:
+    volumeClaimTemplates:
+      - name: ch-volume
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 200Mi
+
+    podTemplates:
+    - name: clickhouse-server
+      spec:
+        containers:
+          - name: clickhouse-pod
+            image: clickhouse/clickhouse-server:23.2

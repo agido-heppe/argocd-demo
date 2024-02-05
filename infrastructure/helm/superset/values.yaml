@@ -1,0 +1,23 @@
+superset: 
+
+
+  configOverrides:
+    secret: |
+      SECRET_KEY = "cypEso9fUAmh8dkE6uJWjHLdKEDy2iNOQnWEO/18R8PuteUdzVDkFK0F"
+
+  bootstrapScript: |
+    #!/bin/bash
+    pip install clickhouse-connect>=0.6.8 pydruid pinotdb rockset-sqlalchemy AuthLib &&\
+    if [ ! -f ~/bootstrap ]; then echo "Running Superset with uid {{ .Values.runAsUser }}" > ~/bootstrap; fi
+
+  supersetCeleryFlower:
+    # ToDo: 
+    enabled: false
+
+zookeeper:
+  enabled: false
+
+  persistence: 
+    enabled: false
+
+  replicaCount: 1
