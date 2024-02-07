@@ -1,13 +1,37 @@
+# setup of the git repository
+# secrets should be contained in a dedicated file
 apiVersion: v1
-data:
-  name: ZGVmYXVsdA==
-  project: ZGVmYXVsdA==
-  type: Z2l0
-  url: aHR0cHM6Ly9naXRodWIuY29tL2FnaWRvLWhlcHBlL2FyZ29jZC1kZW1vLmdpdA==
 kind: Secret
 metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
   name: default
   namespace: argocd
+stringData:
+  name: argocd-repo
+  project: default
+  type: git
+  url:  https://github.com/agido-heppe/argocd-demo.git
 type: Opaque
+
+---
+
+
+############
+# DO NOT COMMIT the below code especially with your credentials to GIT
+############
+
+# uncomment the below setup to manually apply the correct secrets to the repository access
+
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: argocd-repo
+#   namespace: argocd
+#   labels:
+#     argocd.argoproj.io/secret-type: repo-creds
+# stringData:
+#   type: git
+#   url: https://github.com/agido-heppe/argocd-demo.git
+#   username: my-username
+#   password: my-password
