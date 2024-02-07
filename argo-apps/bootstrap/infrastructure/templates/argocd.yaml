@@ -8,8 +8,9 @@ metadata:
 spec:
   project: default
   source:
+    repoURL: {{ required "URL must be set" .Values.repoUrl }}
+    targetRevision: {{ required "targetRevision must be set" .Values.targetRevision }}
     path: infrastructure/helm/argocd
-    repoURL: https://github.com/agido-heppe/argocd-demo.git
     helm:
       releaseName: argo-cd
       valueFiles:
